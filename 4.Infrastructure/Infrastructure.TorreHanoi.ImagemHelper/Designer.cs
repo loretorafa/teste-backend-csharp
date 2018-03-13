@@ -35,7 +35,7 @@ namespace Infrastructure.TorreHanoi.ImagemHelper
             _larguraImagem = 900;
             _alturaImagem = 600;
             _distanciaEntreTorres = 225;
-            _alturaMinima = torre.Discos.Count * _alturaPadrao;
+            _alturaMinima = _alturaTorre;
 
             _corDiscoPar = Brushes.Red;
             _corDiscoImpar = Brushes.Blue;
@@ -72,9 +72,9 @@ namespace Infrastructure.TorreHanoi.ImagemHelper
         {
             var discosJaAdicionados = new List<DiscoDto>();
 
-            foreach (var disco in pino.Discos.ToList().OrderByDescending(d => d.Id))
+            foreach (var disco in pino.Discos.ToList().OrderBy(d => d.Id))
             {
-                var alturaDisco = _alturaMinima + (_torre.Discos.Count - discosJaAdicionados.Count) * _larguraDisco;
+                var alturaDisco = _alturaMinima - (pino.Discos.Count - discosJaAdicionados.Count) * _larguraDisco;
                 var larguraDoDisco = disco.Id * _larguraPadrao;
                 var distanciaPosicaoDisco = _distanciaEntreTorres * pino.Tipo - (larguraDoDisco - _larguraTorre) / 2;
 
